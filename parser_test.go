@@ -96,6 +96,7 @@ var testData = []string{
 	"2012(2009).1080p.Dual Audio(Hindi+English) 5.1 Audios",
 	"2012 (2009) 1080p BrRip x264 - 1.7GB - YIFY",
 	"2012 2009 x264 720p Esub BluRay 6.0 Dual Audio English Hindi GOPISAHI",
+	"1883 - S01E01 - 1883 WEBDL-1080p Proper.mkv",
 }
 
 func TestParser(t *testing.T) {

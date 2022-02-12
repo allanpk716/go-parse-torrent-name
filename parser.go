@@ -79,6 +79,12 @@ func Parse(filename string) (*TorrentInfo, error) {
 			endIndex = index
 			//fmt.Printf("    endIndex moved to %d [%q]\n", endIndex, filename[startIndex:endIndex])
 		}
+
+		// If the value already exists, it is no longer updated. see golden_file_083.json
+		if pattern.name == "episode" && tor.Episode != 0 {
+			continue
+		}
+
 		setField(tor, pattern.name, matches[matchIdx][1], matches[matchIdx][2])
 	}
 
