@@ -90,7 +90,14 @@ func Parse(filename string) (*TorrentInfo, error) {
 
 	// Start process for title
 	//fmt.Println("  title: <internal>")
-	raw := strings.Split(filename[startIndex:endIndex], "(")[0]
+	if startIndex > endIndex {
+		startIndex = 0
+	}
+	parts := strings.Split(filename[startIndex:endIndex], "(")
+	if len(parts) < 1 {
+		return tor, nil
+	}
+	raw := parts[0]
 	cleanName = raw
 	if strings.HasPrefix(cleanName, "- ") {
 		cleanName = raw[2:]
