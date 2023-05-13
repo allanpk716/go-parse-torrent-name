@@ -79,12 +79,25 @@ func Parse(filename string) (*TorrentInfo, error) {
 			endIndex = index
 			//fmt.Printf("    endIndex moved to %d [%q]\n", endIndex, filename[startIndex:endIndex])
 		}
+
+		// If the value already exists, it is no longer updated. see golden_file_083.json
+		if pattern.name == "episode" && tor.Episode != 0 {
+			continue
+		}
+
 		setField(tor, pattern.name, matches[matchIdx][1], matches[matchIdx][2])
 	}
 
 	// Start process for title
 	//fmt.Println("  title: <internal>")
-	raw := strings.Split(filename[startIndex:endIndex], "(")[0]
+	if startIndex > endIndex {
+		startIndex = 0
+	}
+	parts := strings.Split(filename[startIndex:endIndex], "(")
+	if len(parts) < 1 {
+		return tor, nil
+	}
+	raw := parts[0]
 	cleanName = raw
 	if strings.HasPrefix(cleanName, "- ") {
 		cleanName = raw[2:]
