@@ -17,8 +17,9 @@ var patterns = []struct {
 	// E.g. Epiode matching on "S01E18" will result in: raw = "E18", clean = "18".
 	re *regexp.Regexp
 }{
-	{"season", false, reflect.Int, regexp.MustCompile(`(?i)(s?([0-9]{1,2}))[ex]`)},
-	{"episode", false, reflect.Int, regexp.MustCompile(`(?i)([ex]([0-9]{2})(?:[^0-9]|$))`)},
+	{"season", false, reflect.Int, regexp.MustCompile(`(?i)(s?([0-9]{1,}))[ex]`)},
+	{"episode", false, reflect.Int, regexp.MustCompile(`(?i)([x]([0-9]{2})(?:[^0-9]|$))`)},
+	{"episode", false, reflect.Int, regexp.MustCompile(`(?i)([e]([0-9]{2,})(?:[^0-9]|$))`)},
 	{"episode", false, reflect.Int, regexp.MustCompile(`(-\s+([0-9]{1,})(?:[^0-9]|$))`)},
 	{"year", true, reflect.Int, regexp.MustCompile(`\b(((?:19[0-9]|20[0-9])[0-9]))\b`)},
 
